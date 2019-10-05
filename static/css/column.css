@@ -1,0 +1,60 @@
+:root{
+  --column-color: #808080
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.main-column {
+  background-color: var(--column-color);
+  max-width: 30%;
+  min-width: 20%;
+  width: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.column-member {
+  background-color: #909090;
+  border-radius: 15px;
+  margin: 20px 15px 70px;
+}
+
+.usr-info {
+  height: 20%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.user-data {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.avatar-wrapper {
+  border-radius: 50%;
+  max-width: 40%
+}
+
+.avatar-img {
+  border-radius: 50%;
+  min-height: 50%;
+  max-height: calc(100% - 20px);
+  border: 3px solid #808080;
+  margin: 10px 10px 10px;
+}
+
+.main-content {
+
+  min-width: 80%;
+  width: auto;
+  height: 100vh;
+  width: auto;
+}
