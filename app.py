@@ -10,9 +10,34 @@ Session(app)
 def index():
 	return render_template("index.html",title = "Homepage")
 
-@app.route("/registrants")
+recent_entries = [
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"],
+["Bananas", "12312", "69"],
+["Apples", "123", "23"],
+["Pears","241","342"]
+]
+
+
+@app.route("/inv")
 def registrants():
-	return render_template("registrants.html", students = reg)
+	return render_template("inv.html", recent = recent_entries)
 
 @app.route("/register", methods=["POST"])
 def register():

@@ -1,5 +1,5 @@
 :root{
-  --column-color: #808080
+  --column-color: #607880; 
 }
 
 body {
@@ -22,11 +22,31 @@ body {
 .column-member {
   background-color: #909090;
   border-radius: 15px;
-  margin: 20px 15px 70px;
+  margin: 20px 15px 20px;
+}
+
+.column-content-member {
+  background-color: #707070;
+  border-radius: 10px;
+  margin: 10px 10px 10px;
+}
+
+.column-form {
+  padding: 10px 10px 10px;
+  spacing: 10px;
+}
+input, .label-form{
+  padding: 10px 10px 10px;
+  margin: 10px 10px 10px !important;
+}
+
+.column-content {
+  height: calc(86% - 40px);
+  overflow-y: auto;
 }
 
 .usr-info {
-  height: 20%;
+  height: 14%;
 
   display: flex;
   flex-direction: row;
@@ -52,9 +72,15 @@ body {
 }
 
 .main-content {
-
+  background-color: white;
   min-width: 80%;
   width: auto;
   height: 100vh;
   width: auto;
+  overflow-y: auto;
+}
+
+.main-content-container {
+  min-width: 100%;
+  padding: 0 !important;
 }

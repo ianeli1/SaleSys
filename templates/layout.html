@@ -7,6 +7,9 @@
         background-color: rgb(220,220,220) !important;
       }
     </style>
+    {% block script %}
+    {% endblock %}
+
     <link rel="stylesheet" href="{{ url_for('static',filename='css/column.css') }}">
     <script src="{{ url_for('static',filename='js/index.js') }}" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,22 +32,13 @@
             <p>{{ code or "#404!" }}</p>
           </div>
         </div>
-        <p class="column-member">test test test test test test test test test test </p>
+        <div class="column-content column-member">
+          {% block column %} {% endblock %}
+        </div>
       </div>
       <div class="main-content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-          {% if title %}
-          <a class="navbar-brand" href="/">SaleSys | {{ title }}</a>
-          {% else %}
-          <a class="navbar-brand" href="/">SaleSys</a>
-          {% endif %}
-        </nav>
-        <div class="container text-center">
+        <div class="container text-center main-content-container">
         {% block body %} {% endblock %}
-        </div>
-        <div class="navbar fixed-bottom bg-light">
-
-          <label class="navbar-brand">SaleSys</label>
         </div>
       </div>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
