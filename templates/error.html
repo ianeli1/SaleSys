@@ -1,0 +1,24 @@
+{% extends "layout2.html" %}
+
+{% block body %}
+<div class="jumbotron">
+  <h1>{{ error_code or "Unknown error"}}</h1>
+  <hr class="my-4">
+  {% if error_code == "404" %}
+  <p>We couldn't find what you were looking for. :(
+  Report this error to the system administrator immediately and show them this url:</p>
+  {% else %}
+  <p>There was an internal error the server couldn't handle!
+    Please show this page to the system administrator.</p>
+  {% endif %}
+  <h6 id="error_url">url goes here</h6>
+  <a href="/" class="btn btn-primary">Return to a safe place</a>
+</div>
+
+<script>
+  window.onload = function(){
+    document.getElementById("error_url").innerHTML = window.location.toString();
+  }
+</script>
+
+{% endblock %}

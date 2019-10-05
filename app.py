@@ -36,7 +36,7 @@ recent_entries = [
 
 
 @app.route("/inv")
-def registrants():
+def inventory():
 	return render_template("inv.html", recent = recent_entries)
 
 @app.route("/register", methods=["POST"])
@@ -60,8 +60,8 @@ def login():
 
 @app.errorhandler(404)
 def page_not_found(e):
-	return render_template("error.html",title = "404", username = "big oop", error = "404", desc = "Oop, our server headed out for a sec")
+	return render_template("error.html",error_code="404")
 
 @app.errorhandler(500)
 def page_oop(e):
-	return render_template("error.html", title = "500", username = "big oop", error = "500", desc = "Ain't this a bruh moment")
+	return render_template("error.html", error_code="500")
