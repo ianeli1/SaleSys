@@ -49,6 +49,9 @@ def register():
 	reg.append(name + " from " + dorm)
 	message = "You are now registered!"
 	return redirect("/registrants")
+	name = request.form.get("name")
+	email = request.form.get("email")
+	employee
 
 @app.route("/zuck")
 def zuck():
