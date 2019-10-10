@@ -1,4 +1,5 @@
 import sqlite3
+from logger import action, debug, critical
 dbconn = sqlite3.connect("users.db")
 db = dbconn.cursor()
 
@@ -29,15 +30,19 @@ class User:
         if get_hash(user) == self.hash:
             self.id = get_id(user)
             self.name = get_name(user)
+            action(self.id, "Logged in succesfully.")
             return True
         else:
             self.id = -1
             self.name = "Incorrect Login"
+            action(get_id(user), "Failed to provide the correct credentials.")
             return False
-            # TODO: log this
+
 
     def register(self, name, email, hash):
+        # TODO: check if user already exists, check values correct
         try:
             db.execute("INSERT INTO users (name,email,hash) VALUES (?,?,?);",[name,email,hash])
+
         except sqlite3.Error as e:
-            # TODO: Log this failed attempt
+            debug("SQLHandler.User.register", "Database failed to insert new value into users table.")
