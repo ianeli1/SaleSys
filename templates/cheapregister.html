@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block column %}
+<div class="column-content-member">
+  <form class="form-group column-form" action="/register" method="post">
+    <label class="label-form navbar-brand">Registration</label>
+    <input type="text" name="name" placeholder="Richard Richardsson">
+    <input type="text" name="email" placeholder="Richard@Richardsson.com">
+    <input type="password" name="hash" placeholder="password">
+    <input type="submit" class="btn btn-primary" value="Register">
+  </form>
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron">
+  <h1>Hello</h1>
+  <p>welcome to the cheap registration page i made in 5 minutes</p>
+
+</div>
+
+{% endblock %}

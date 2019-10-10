@@ -3,7 +3,11 @@ from flask_session import Session
 from logger import action, debug, critical
 import data.SQLHandler as sql
 
+
+
 action("SERVER", "Server session started.", True)
+
+
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -42,19 +46,19 @@ recent_entries = [
 def inventory():
 	return render_template("inv.html", recent = recent_entries)
 
+@app.route("/reg")
+def reg():
+	return render_template("cheapregister.html",title = "Reg!")
+
+
 @app.route("/register", methods=["POST"])
 def register():
 	name = request.form.get("name")
 	email = request.form.get("email")
-	dorm = request.form.get("dorm")
-	if not name or not dorm or not email:
-		return render_template("failure.html")
-	reg.append(name + " from " + dorm)
-	message = "You are now registered!"
-	return redirect("/registrants")
-	name = request.form.get("name")
-	email = request.form.get("email")
-	employee
+	hash = request.form.get("password")
+	session['User'] = sql.User(email,hash)
+	session['User'].register(str(name),str(email),str(hash))
+	return redirect("/")
 
 @app.route("/zuck")
 def zuck():
