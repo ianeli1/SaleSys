@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block column %}
+
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+  <h1>User class debugger</h1>
+
+  <ul class="list-group">
+    <li class="list-group-item">UsrId: {{ cls.get_id() }}</li>
+    <li class="list-group-item">UsrId: {{ cls.get_name() }}</li>
+    <li class="list-group-item">UsrId: {{ cls.get_email() }}</li>
+    <li class="list-group-item">UsrId: {{ cls.get_hash() }}</li>
+  </ul>
+
+
+</div>
+{% endblock %}

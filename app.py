@@ -55,7 +55,7 @@ def reg():
 def register():
 	name = request.form.get("name")
 	email = request.form.get("email")
-	hash = request.form.get("password")
+	hash = request.form.get("hash")
 	session['User'] = sql.User(email,hash)
 	session['User'].register(str(name),str(email),str(hash))
 	return redirect("/")
@@ -64,14 +64,23 @@ def register():
 def zuck():
 	return render_template("zuck.html")
 
-@app.route("/login")
+@app.route("/login", methods = ["POST"])
 def login():
-	return render_template("login.html")
+	email = request.form.get("email")
+	hash = request.form.get("hash")
+	session['User'] = sql.User(email,hash)
+	session['User'].login()
+	return redirect("/")
+
+@app.route("/debug")
+def debug():
+	return render_template("debugUser.html", title="UserDebug", cls = session['User'])
+
 
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template("error.html",error_code="404")
 
-@app.errorhandler(500)
+@app.errorhandler	(500)
 def page_oop(e):
 	return render_template("error.html", error_code="500")
