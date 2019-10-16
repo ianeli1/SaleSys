@@ -25,16 +25,26 @@
     <th scope="col">Name</th>
     <th scope="col">Code</th>
     <th scope="col">Amount</th>
+    <th scope="col">Price</th>
   </thead>
   <tbody>
-    {% for item in recent %}
-    <tr>
-      <th scope="row"> > {{ item[0] }}</th>
-      <td>{{ item[1] }}</td>
-      <td>{{ item[2] }}</td>
-    </tr>
-    {% endfor %}
-
+    {% if recent %}
+      {% for item in recent %}
+      <tr>
+        <th scope="row"> > {{ item.getName() }}</th>
+        <td>{{ item.getId() }}</td>
+        <td>{{ item.getAmount() }}</td>
+        <td>{{ item.getPrice() }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <th>No</th>
+        <td>recent</td>
+        <td>items.</td>
+        <td></td>
+    {% endif %}
+      </tr>
   </tbody>
 </table>
 

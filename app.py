@@ -18,27 +18,6 @@ def index():
 	return render_template("index.html",title = "Homepage")
 
 recent_entries = [
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"],
-["Bananas", "12312", "69"],
-["Apples", "123", "23"],
-["Pears","241","342"]
 ]
 
 
