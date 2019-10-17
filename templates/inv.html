@@ -7,10 +7,11 @@
 {% block column %}
 
 <div class="column-content-member">
-  <form class="form-group column-form" action="#" method="post">
+  <form name="itemRegist" class="form-group column-form" action="#" onsubmit="return registerItem()" method="post">
     <label class="label-form navbar-brand">Product registration</label>
-    <input type="text" name="code" placeholder="Product Code">
-    <input type="text" name="amount" placeholder="Amount">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="amount" placeholder="Amount" required>
+    <input type="text" name="price" placeholder="Price">
     <input type="text" name="comment" placeholder="Comment">
     <input type="submit" value="Submit" class="btn btn-primary">
   </form>
@@ -26,15 +27,19 @@
     <th scope="col">Code</th>
     <th scope="col">Amount</th>
     <th scope="col">Price</th>
+    <th scope="col">...</th>
   </thead>
   <tbody>
     {% if recent %}
       {% for item in recent %}
-      <tr>
-        <th scope="row"> > {{ item.getName() }}</th>
-        <td>{{ item.getId() }}</td>
-        <td>{{ item.getAmount() }}</td>
-        <td>{{ item.getPrice() }}</td>
+      <tr id="tr{{ recent[item].getId() }}">
+        <th scope="row"> > {{ recent[item].getName() }}</th>
+        <td>{{ recent[item].getId() }}</td>
+        <td>{{ recent[item].getAmount() }}</td>
+        <td>{{ recent[item].getPrice() }}</td>
+        <td>
+          <button class="btn btn-primary" type="button" name="button" onclick="getComment({{ recent[item].getId() }})">+</button>
+        </td>
       </tr>
       {% endfor %}
     {% else %}
@@ -42,12 +47,13 @@
         <th>No</th>
         <td>recent</td>
         <td>items.</td>
-        <td></td>
+        <td>Oop</td>
     {% endif %}
       </tr>
   </tbody>
 </table>
 
+<script src="{{ url_for('static', filename='js/inv.js') }}" charset="utf-8"></script>
 
 
 {% endblock %}

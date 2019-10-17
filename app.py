@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, jsonify
 from flask_session import Session
 from logger import action, debug, critical
 import data.SQLHandler as sql
@@ -17,9 +17,7 @@ Session(app)
 def index():
 	return render_template("index.html",title = "Homepage")
 
-recent_entries = [
-]
-
+recent_entries = sql.fetchInventory()
 
 @app.route("/inv")
 def inventory():
@@ -63,3 +61,46 @@ def page_not_found(e):
 @app.errorhandler	(500)
 def page_oop(e):
 	return render_template("error.html", error_code="500")
+
+@app.route("/get", methods = ["GET"])
+def get():
+	type = request.args.get('type') #user or item
+	attr = request.args.get('attr') #user: name, email, hash | item: name, amount, price, comment
+	id = request.args.get('id')
+	if type == "item":
+		if attr == "name":
+			return recent_entries[id].getName() or "None."
+		elif attr == "amount":
+			return recent_entries[id].getAmount() or "None."
+		elif attr == "price":
+			return recent_entries[id].getPrice() or "None."
+		elif attr == "comment":
+			return recent_entries[id].getComment() or "None."
+		else:
+			return "attrError"
+	else:
+		return "todo!"
+
+def isNameInDic(name, dic){ # TODO: make it more efficient
+	for i in dic:
+		if dic[i].getName() == name:
+			return True
+	return False
+}
+
+@app.route("/registerItem", methods = ["GET"])
+def registerItem():
+	name = request.args.get('name')
+	amount = request.args.get('amount')
+	price = request.args.get('price')
+	comment = request.args.get('comment')
+	if isNameInDic(name, recent_entries):
+		return ""
+	else:
+		newItem = Item(name)
+		newItem.setAmount(amount)
+		newItem.setPrice(price)
+		newItem.setComment(comment)
+		newItem.push() # TODO: integrate with a better push mechanism
+		newItem.fetch()
+		return jsonify(newItem.getDict())

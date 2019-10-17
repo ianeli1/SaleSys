@@ -96,10 +96,26 @@ class User:
         else:
             return "Login failed."
 
+# TODO: create a system to control fetch calls and not make requests every single time
+
+def fetchInventory():
+    items = SQLdo("SELECT * FROM inv")
+    everything = {}
+    for item in items:
+        newItem = Item(item[1])
+        newItem.setId(item[0])
+        newItem.setComment(item[2])
+        newItem.setAmount(item[3])
+        newItem.setPrice(item[4])
+        everything[str(newItem.getId())] = newItem
+    return everything #lmao
+
+
+
 class Item:
     def __init__(self, name):
         self.name = name
-        self.id = 0
+        self.id = -1
         self.comment = ""
         self.amount = -9999
         self.price = -9999
@@ -128,7 +144,7 @@ class Item:
 
     def push(self):
         # TODO: push values to db
-        if id != 0:
+        if self.id != -1:
             try:
                 SQLdo("UPDATE inv SET name = ?, comment = ?, amount = ?, price = ? WHERE itemId = ?",[self.name, self.comment, self.amount, self.price, self.id])
                 return True
@@ -140,11 +156,10 @@ class Item:
             return False
 
     def change(self, difference):
-        if isinstance(difference, int) or isinstance(difference, float):
-        self.fetch()
-        if difference < 0 and (-1)*difference > self.amount:
-            # TODO: report this
-            return False
+        if isinstance(difference, int):
+            self.fetch()
+            self.amount = self.amount + difference
+            push()
 
 
     def setAmount(self,value):
@@ -187,7 +202,20 @@ class Item:
         return self.name
 
     def setId(self, value):
-        return False #SQL wouldn't like that
+        if self.id == -1:
+            self.id = value
+            return True
+        else:
+            return False #SQL wouldn't like that
 
     def getId(self):
         return self.id
+
+    def getDict(self):
+        return {
+        "id": str(self.id),
+        "name": str(self.name),
+        "amount": str(self.amount),
+        "price": str(self.price),
+        "comment": str(self.comment)
+        }
